@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réserver un véhicule | Alhatab Rent Car Tunisie</title>
+    
+    <!-- Meta Descriptions & SEO -->
+    <meta name="description" content="Réservez votre voiture en ligne en Tunisie avec Alhatab Rent Car. Simple, rapide et paiement sécurisé par Click to Pay.">
+    <meta name="keywords" content="réservation voiture tunisie, location voiture aéroport tunis carthage, click to pay tunisie, louer voiture tunisie en ligne">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                </svg>
+                Alhatab <span>Rent Car</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="cars.html">Nos Voitures</a>
+                <a href="reserve.html" class="active">Réserver</a>
+                <a href="dashboard.html">Espace Client</a>
+                <a href="admin.html">Administration</a>
+            </nav>
+            
+            <button class="nav-btn" onclick="window.location.href='reserve.html'">Réserver</button>
+            
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Réservation en Ligne</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Accueil</a>
+                <span>&gt;</span>
+                <span>Réserver</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funnel Wrapper -->
+    <main class="container" style="padding-bottom: 80px; margin-top: 40px;">
+        <div class="reservation-layout">
+            
+            <!-- Step Indicators -->
+            <div class="progress-bar-container">
+                <div class="progress-line"></div>
+                <div class="progress-line-fill" id="progress-line-fill"></div>
+                
+                <div class="progress-steps">
+                    <div class="step-indicator active" data-step="1">
+                        <div class="step-num">1</div>
+                        <span class="step-label">Dates & Lieux</span>
+                    </div>
+                    <div class="step-indicator" data-step="2">
+                        <div class="step-num">2</div>
+                        <span class="step-label">Véhicule</span>
+                    </div>
+                    <div class="step-indicator" data-step="3">
+                        <div class="step-num">3</div>
+                        <span class="step-label">Options</span>
+                    </div>
+                    <div class="step-indicator" data-step="4">
+                        <div class="step-num">4</div>
+                        <span class="step-label">Coordonnées</span>
+                    </div>
+                    <div class="step-indicator" data-step="5">
+                        <div class="step-num">5</div>
+                        <span class="step-label">Récap</span>
+                    </div>
+                    <div class="step-indicator" data-step="6">
+                        <div class="step-num">6</div>
+                        <span class="step-label">Paiement</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Content Grid -->
+            <div class="booking-grid">
+                
+                <!-- Steps Form Container -->
+                <div id="booking-steps-container">
+                    
+                    <!-- STEP 1: DATES & LOCATIONS -->
+                    <div class="booking-step active" id="step-1">
+                        <div class="glass" style="padding: 30px; border-radius: var(--radius-md);">
+                            <h3 style="font-family: var(--font-title); font-size: 22px; color: var(--primary); margin-bottom: 24px;">1. Dates et lieux de location</h3>
+                            <form id="form-step-1">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                    <div class="form-group">
+                                        <label for="res-pickup-loc">Lieu de prise en charge</label>
+                                        <select id="res-pickup-loc" class="form-control" required>
+                                            <option value="" disabled selected>Choisir un lieu...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="res-return-loc">Lieu de restitution</label>
+                                        <select id="res-return-loc" class="form-control" required>
+                                            <option value="" disabled selected>Choisir un lieu...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.5fr 1fr; gap: 15px; margin-bottom: 20px;">
+                                    <div class="form-group">
+                                        <label for="res-pickup-date">Date de départ</label>
+                                        <input type="date" id="res-pickup-date" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="res-pickup-time">Heure</label>
+                                        <input type="time" id="res-pickup-time" class="form-control" value="10:00" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="res-return-date">Date de retour</label>
+                                        <input type="date" id="res-return-date" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="res-return-time">Heure</label>
+                                        <input type="time" id="res-return-time" class="form-control" value="10:00" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-nav">
+                                    <span></span> <!-- Empty span to push next button right -->
+                                    <button type="submit" class="btn btn-primary">Continuer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: CAR SELECTION -->
+                    <div class="booking-step" id="step-2">
+                        <h3 style="font-family: var(--font-title); font-size: 22px; color: var(--primary); margin-bottom: 20px;">2. Sélectionner votre véhicule</h3>
+                        <p style="color: var(--text-gray); margin-bottom: 20px;" id="available-cars-count">Recherche en cours...</p>
+                        
+                        <div class="reservation-cars-list" id="reservation-cars-list">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <div class="step-nav" style="margin-top: 30px;">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">Retour</button>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: OPTIONS -->
+                    <div class="booking-step" id="step-3">
+                        <div class="glass" style="padding: 30px; border-radius: var(--radius-md);">
+                            <h3 style="font-family: var(--font-title); font-size: 22px; color: var(--primary); margin-bottom: 8px;">3. Options supplémentaires</h3>
+                            <p style="color:var(--text-gray); margin-bottom: 24px;">Personnalisez votre location selon vos besoins en Tunisie.</p>
+                            
+                            <div class="options-list">
+                                <label class="option-item glass" for="opt-assurance">
+                                    <div class="option-left">
+                                        <input type="checkbox" id="opt-assurance" data-price="25">
+                                        <div class="option-text">
+                                            <h4>Assurance Franchise Zéro</h4>
+                                            <p>Zéro responsabilité en cas de vol ou d'accident sans franchise.</p>
+                                        </div>
+                                    </div>
+                                    <span class="option-price">25 DT / jour</span>
+                                </label>
+
+                                <label class="option-item glass" for="opt-gps">
+                                    <div class="option-left">
+                                        <input type="checkbox" id="opt-gps" data-price="10">
+                                        <div class="option-text">
+                                            <h4>Navigateur GPS</h4>
+                                            <p>Ne vous perdez jamais. Cartes tunisiennes pré-chargées hors-ligne.</p>
+                                        </div>
+                                    </div>
+                                    <span class="option-price">10 DT / jour</span>
+                                </label>
+
+                                <label class="option-item glass" for="opt-siege">
+                                    <div class="option-left">
+                                        <input type="checkbox" id="opt-siege" data-price="15">
+                                        <div class="option-text">
+                                            <h4>Siège Bébé / Enfant</h4>
+                                            <p>Conforme aux normes de sécurité routière pour les petits.</p>
+                                        </div>
+                                    </div>
+                                    <span class="option-price">15 DT / jour</span>
+                                </label>
+
+                                <label class="option-item glass" for="opt-conducteur">
+                                    <div class="option-left">
+                                        <input type="checkbox" id="opt-conducteur" data-price="15">
+                                        <div class="option-text">
+                                            <h4>Conducteur Additionnel</h4>
+                                            <p>Partagez le plaisir de conduire à deux durant votre séjour.</p>
+                                        </div>
+                                    </div>
+                                    <span class="option-price">15 DT / jour</span>
+                                </label>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-secondary" onclick="prevStep()">Retour</button>
+                                <button type="button" class="btn btn-primary" onclick="submitOptions()">Continuer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: CUSTOMER DETAILS -->
+                    <div class="booking-step" id="step-4">
+                        <div class="glass" style="padding: 30px; border-radius: var(--radius-md);">
+                            <h3 style="font-family: var(--font-title); font-size: 22px; color: var(--primary); margin-bottom: 24px;">4. Informations personnelles</h3>
+                            <form id="form-step-4">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                    <div class="form-group">
+                                        <label for="cust-firstname">Prénom</label>
+                                        <input type="text" id="cust-firstname" class="form-control" required placeholder="Ex: Jean">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cust-lastname">Nom</label>
+                                        <input type="text" id="cust-lastname" class="form-control" required placeholder="Ex: Dupont">
+                                    </div>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                    <div class="form-group">
+                                        <label for="cust-email">Email</label>
+                                        <input type="email" id="cust-email" class="form-control" required placeholder="Ex: jean.dupont@gmail.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cust-phone">Téléphone</label>
+                                        <input type="tel" id="cust-phone" class="form-control" required placeholder="Ex: +33 6 12 34 56 78">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <label for="cust-address">Adresse de résidence</label>
+                                    <input type="text" id="cust-address" class="form-control" required placeholder="Ex: 15 Rue de Paris, Paris">
+                                </div>
+
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <label for="cust-license">Numéro de permis de conduire</label>
+                                    <input type="text" id="cust-license" class="form-control" required placeholder="Ex: 94/123456 (Permis de plus de 2 ans requis)">
+                                </div>
+
+                                <div class="step-nav">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep()">Retour</button>
+                                    <button type="submit" class="btn btn-primary">Continuer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: BOOKING SUMMARY -->
+                    <div class="booking-step" id="step-5">
+                        <div class="glass" style="padding: 30px; border-radius: var(--radius-md);">
+                            <h3 style="font-family: var(--font-title); font-size: 22px; color: var(--primary); margin-bottom: 24px;">5. Récapitulatif et confirmation</h3>
+                            
+                            <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border);">
+                                <h4 style="font-family: var(--font-title); margin-bottom: 12px; color: var(--text-light);">Conducteur principal :</h4>
+                                <p style="font-size: 15px;" id="summary-client-name"></p>
+                                <p style="font-size: 14px; color: var(--text-gray);" id="summary-client-details"></p>
+                            </div>
+
+                            <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border);">
+                                <h4 style="font-family: var(--font-title); margin-bottom: 12px; color: var(--text-light);">Détails de l'itinéraire :</h4>
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; font-size: 14px; color: var(--text-gray);">
+                                    <div>
+                                        <strong style="color:var(--text-light);">Départ :</strong>
+                                        <p id="summary-loc-pickup"></p>
+                                        <p id="summary-date-pickup"></p>
+                                    </div>
+                                    <div>
+                                        <strong style="color:var(--text-light);">Retour :</strong>
+                                        <p id="summary-loc-return"></p>
+                                        <p id="summary-date-return"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 24px;">
+                                <h4 style="font-family: var(--font-title); margin-bottom: 12px; color: var(--text-light);">Options sélectionnées :</h4>
+                                <ul id="summary-options-list" style="list-style:none; font-size: 14px; color: var(--text-gray); display:flex; flex-direction:column; gap:8px;">
+                                    <!-- Populated dynamically -->
+                                </ul>
+                            </div>
+
+                            <div style="background-color: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 24px;">
+                                <label class="checkbox-label" style="align-items: flex-start;">
+                                    <input type="checkbox" id="accept-conditions" required style="margin-top: 4px;">
+                                    <span style="font-size: 13px; line-height: 1.4;">J'accepte les conditions de location de Alhatab Rent Car, y compris la politique d'âge minimum (21 ans) et de validité de permis (2 ans minimum).</span>
+                                </label>
+                            </div>
+
+                            <div class="step-nav">
+                                <button type="button" class="btn btn-secondary" onclick="prevStep()">Retour</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToPayment()">Passer au paiement</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 6: CLICK TO PAY GATEWAY -->
+                    <div class="booking-step" id="step-6">
+                        <div class="ctp-portal">
+                            <div class="ctp-header">
+                                <div class="ctp-logo">Monétique <span>Tunisie</span></div>
+                                <div class="ctp-subtitle">Portail de Paiement Sécurisé National</div>
+                                <div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 10px; border: 1px solid rgba(255,255,255,0.4); padding: 4px 8px; border-radius: 4px; background: rgba(0,0,0,0.2);">
+                                    SPS SECURE
+                                </div>
+                            </div>
+                            
+                            <div class="ctp-body">
+                                <div class="ctp-summary-box">
+                                    <div class="ctp-summary-row">
+                                        <span>Marchand :</span>
+                                        <strong>ALHATAB RENT CAR</strong>
+                                    </div>
+                                    <div class="ctp-summary-row">
+                                        <span>Durée de location :</span>
+                                        <strong id="ctp-duration">5 jours</strong>
+                                    </div>
+                                    <div class="ctp-summary-row">
+                                        <span>Montant total :</span>
+                                        <strong id="ctp-amount" style="color: #1b3d6d; font-size: 18px;">950.000 DT</strong>
+                                    </div>
+                                </div>
+
+                                <div class="ctp-card-types">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Visa_Logo.png" class="ctp-card-logo active" alt="Visa" id="logo-visa">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" class="ctp-card-logo" alt="Mastercard" id="logo-mastercard">
+                                    <div style="font-weight: bold; border: 1px solid #ced4da; padding: 2px 6px; border-radius: 4px; font-size: 11px; color:#555;" id="logo-cbn">C. B. N.</div>
+                                </div>
+
+                                <form id="ctp-payment-form">
+                                    <div class="ctp-form-group">
+                                        <label for="ctp-card-num">Numéro de carte bancaire</label>
+                                        <input type="text" id="ctp-card-num" class="ctp-input" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                                    </div>
+
+                                    <div class="ctp-col-2">
+                                        <div class="ctp-form-group">
+                                            <label for="ctp-card-expiry">Date d'expiration</label>
+                                            <input type="text" id="ctp-card-expiry" class="ctp-input" placeholder="MM/AA" maxlength="5" required>
+                                        </div>
+                                        <div class="ctp-form-group">
+                                            <label for="ctp-card-cvc">Code CVC</label>
+                                            <input type="text" id="ctp-card-cvc" class="ctp-input" placeholder="123" maxlength="3" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="ctp-form-group">
+                                        <label for="ctp-card-name">Nom du titulaire</label>
+                                        <input type="text" id="ctp-card-name" class="ctp-input" placeholder="Ex: JEAN DUPONT" required style="text-transform: uppercase;">
+                                    </div>
+
+                                    <button type="submit" class="ctp-btn">Confirmer le paiement sécurisé</button>
+                                    <button type="button" class="ctp-btn-fail" onclick="simulatePaymentFailure()">Simuler un échec de transaction</button>
+                                </form>
+
+                                <div class="ctp-secure-footer">
+                                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                                    Connexion cryptée SSL 256 bits | Monétique Tunisie
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUCCESS PANEL -->
+                    <div class="booking-step" id="step-success">
+                        <div class="booking-result glass">
+                            <div class="result-icon success">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <h2>Paiement Confirmé !</h2>
+                            <p>Merci pour votre confiance. Votre réservation a bien été enregistrée et payée. Un email de confirmation contenant votre reçu a été envoyé.</p>
+                            
+                            <div class="ctp-summary-box glass" style="color:var(--text-light); border: 1px solid var(--border); margin: 30px 0; text-align: left; padding: 24px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                    <span>Référence Réservation :</span>
+                                    <strong id="success-res-id" style="color:var(--primary);"></strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                    <span>Réf Transaction Click to Pay :</span>
+                                    <strong id="success-tx-ref"></strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span>Montant Débité :</span>
+                                    <strong id="success-amount" style="color:var(--primary);"></strong>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; gap:16px; justify-content:center;">
+                                <a href="dashboard.html" class="btn btn-primary">Suivre sur mon Espace Client</a>
+                                <a href="index.html" class="btn btn-secondary">Retour à l'accueil</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAILURE PANEL -->
+                    <div class="booking-step" id="step-failure">
+                        <div class="booking-result glass" style="border-color: var(--error);">
+                            <div class="result-icon error">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <h2>Échec de la transaction</h2>
+                            <p>Le serveur de paiement tunisien a refusé la transaction. Cela peut être dû à un solde insuffisant, un plafond dépassé ou une erreur de saisie des coordonnées bancaires.</p>
+                            
+                            <div style="display:flex; gap:16px; justify-content:center;">
+                                <button onclick="retryPayment()" class="btn btn-primary">Réessayer le paiement</button>
+                                <a href="cars.html" class="btn btn-secondary">Changer de véhicule</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Booking Summary Sidebar -->
+                <aside class="booking-summary-sidebar glass" id="summary-sidebar" style="display: none;">
+                    <h3 class="sidebar-title">Votre Devis</h3>
+                    
+                    <div class="summary-car-preview" id="side-car-preview">
+                        <!-- Populated dynamically -->
+                    </div>
+                    
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Durée de location :</span>
+                            <span id="side-duration">0 jour</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Prix du véhicule :</span>
+                            <span id="side-car-price">0 DT</span>
+                        </div>
+                        <div class="summary-row" id="side-options-row" style="display: none;">
+                            <span>Options :</span>
+                            <span id="side-options-price">0 DT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Total :</span>
+                        <strong id="side-total-price">0 DT</strong>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                        </svg>
+                        Alhatab <span>Rent Car</span>
+                    </a>
+                    <p>Votre partenaire de confiance pour la location de voiture en Tunisie. Flotte de prestige, assistance routière complète, tarifs compétitifs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.71.054 2.637.12 4.07 1.537 4.19 4.19.044.927.054 1.281.054 3.71 0 2.43-.01 2.784-.054 3.71-.12 2.637-1.537 4.07-4.19 4.19-.927.044-1.281.054-3.71.054-2.43 0-2.784-.01-3.71-.054-2.637-.12-4.07-1.537-4.19-4.19-.044-.927-.054-1.281-.054-3.71 0-2.43.01-2.784.054-3.71.12-2.637 1.537-4.07 4.19-4.19.927-.044 1.281-.054 3.71-.054zm0-2c-2.48 0-2.79.01-3.76.054-3.5 0-5.44 1.94-5.44 5.44 0 .97.01 1.28.054 3.76 0 2.48-.01 2.79-.054 3.76.12 3.5 2.06 5.44 5.44 5.44.97 0 1.28-.01 3.76-.054 2.48 0 2.79-.01 3.76-.054 3.5 0 5.44-1.94 5.44-5.44 0-.97-.01-1.28-.054-3.76 0-2.48.01-2.79.054-3.76-.12-3.5-2.06-5.44-5.44-5.44-.97 0-1.28-.01-3.76-.054zm0 5.837a6.163 6.163 0 100 12.326 6.163 6.163 0 000-12.326zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 100-2.881 1.44 1.44 0 000 2.881z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cars.html">Nos Voitures</a></li>
+                        <li><a href="reserve.html">Réserver en Ligne</a></li>
+                        <li><a href="dashboard.html">Espace Client</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Catégories</h4>
+                    <ul>
+                        <li><a href="cars.html?cat=Citadine">Citadines Économiques</a></li>
+                        <li><a href="cars.html?cat=Berline">Berlines Confort</a></li>
+                        <li><a href="cars.html?cat=SUV">SUVs & Crossovers</a></li>
+                        <li><a href="cars.html?cat=Luxe">Véhicules de Prestige</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Tunisie Locations</h4>
+                    <ul>
+                        <li><a href="reserve.html?pickup=tunis_aeroport">Tunis Aéroport Carthage</a></li>
+                        <li><a href="reserve.html?pickup=hammamet_centre">Hammamet</a></li>
+                        <li><a href="reserve.html?pickup=sousse_kantaoui">Sousse</a></li>
+                        <li><a href="reserve.html?pickup=djerba_aeroport">Aéroport Djerba</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alhatab Rent Car. Tous droits réservés. Conçu pour le marché tunisien.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Conditions Générales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/reserve.js"></script>
+</body>
+</html>

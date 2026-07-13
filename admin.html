@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration | Alhatab Rent Car</title>
+    
+    <!-- Meta and styles -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                </svg>
+                Alhatab <span>Rent Car</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="cars.html">Nos Voitures</a>
+                <a href="reserve.html">Réserver</a>
+                <a href="dashboard.html">Espace Client</a>
+                <a href="admin.html" class="active">Administration</a>
+            </nav>
+            
+            <button class="nav-btn" onclick="window.location.href='reserve.html'">Réserver</button>
+            
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header" style="padding-bottom: 40px; padding-top: 140px;">
+        <div class="container">
+            <h1>Console d'Administration</h1>
+            <p style="color:var(--text-gray); font-size:14px; margin-top:8px;">Gestion interne et statistiques Alhatab Rent Car</p>
+        </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <main class="container" style="padding-bottom: 80px; margin-top: 30px;">
+        <div class="dashboard-layout">
+            
+            <!-- Sidebar Admin Navigation -->
+            <aside class="dashboard-sidebar glass">
+                <div class="user-profile-header">
+                    <div class="user-avatar" style="background: var(--text-light); color: var(--bg-dark);">AD</div>
+                    <h3>Admin Portal</h3>
+                    <p>alhatab.admin@gmail.com</p>
+                </div>
+
+                <div class="db-menu">
+                    <button class="db-menu-btn active" onclick="switchAdminTab('stats')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Statistiques
+                    </button>
+                    <button class="db-menu-btn" onclick="switchAdminTab('vehicles')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        Véhicules (CRUD)
+                    </button>
+                    <button class="db-menu-btn" onclick="switchAdminTab('bookings')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        Réservations
+                    </button>
+                    <button class="db-menu-btn" onclick="switchAdminTab('blocked')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Bloquer Dates
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Admin Display Content -->
+            <div style="min-width:0;">
+                
+                <!-- 1. STATS PANEL -->
+                <div class="dashboard-panel active" id="tab-stats">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Statistiques Globales</h2>
+                            <p>Indicateurs de performance de Alhatab Rent Car.</p>
+                        </div>
+                    </div>
+
+                    <!-- Grid metrics -->
+                    <div class="stats-grid">
+                        <div class="stat-card glass">
+                            <div class="stat-info">
+                                <h5>Revenu Total</h5>
+                                <h2 id="stat-revenue">0 DT</h2>
+                            </div>
+                            <div class="stat-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass">
+                            <div class="stat-info">
+                                <h5>Réservations</h5>
+                                <h2 id="stat-bookings-count">0</h2>
+                            </div>
+                            <div class="stat-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass">
+                            <div class="stat-info">
+                                <h5>Véhicules Actifs</h5>
+                                <h2 id="stat-cars-count">0</h2>
+                            </div>
+                            <div class="stat-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2"></path></svg>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass">
+                            <div class="stat-info">
+                                <h5>Taux de Location</h5>
+                                <h2 id="stat-occupancy">0%</h2>
+                            </div>
+                            <div class="stat-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS-based Chart display -->
+                    <div class="glass" style="padding: 30px; border-radius: var(--radius-md); margin-top:20px;">
+                        <h4 style="font-family: var(--font-title); font-size:18px; margin-bottom: 20px; color:var(--primary);">Répartition des Ventes par Catégorie</h4>
+                        <div style="display:flex; flex-direction:column; gap:16px;" id="stats-category-chart">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. VEHICLES CRUD PANEL -->
+                <div class="dashboard-panel" id="tab-vehicles">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Gestion des Véhicules</h2>
+                            <p>Ajouter, modifier ou retirer des voitures du catalogue public.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openCarModal()">Ajouter un véhicule</button>
+                    </div>
+
+                    <div class="table-wrapper glass">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Marque & Modèle</th>
+                                    <th>Catégorie</th>
+                                    <th>Plaque d'immatriculation</th>
+                                    <th>Boîte</th>
+                                    <th>Tarif/Jour</th>
+                                    <th>État</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-vehicles-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. BOOKINGS MANAGEMENT PANEL -->
+                <div class="dashboard-panel" id="tab-bookings">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Gestion des Réservations</h2>
+                            <p>Suivez et mettez à jour le statut des commandes clients.</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="exportReservations()">Exporter en JSON / CSV</button>
+                    </div>
+
+                    <div class="table-wrapper glass">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client</th>
+                                    <th>Véhicule</th>
+                                    <th>Dates</th>
+                                    <th>Montant</th>
+                                    <th>Statut Location</th>
+                                    <th>Paiement</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. CALENDAR DATE BLOCKER PANEL -->
+                <div class="dashboard-panel" id="tab-blocked">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Indisponibilités & Maintenance</h2>
+                            <p>Bloquez des plages de dates pour des entretiens ou réparations.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap:30px; align-items: start;">
+                        
+                        <!-- Form -->
+                        <div class="glass" style="padding: 24px; border-radius: var(--radius-md);">
+                            <h4 style="font-family: var(--font-title); font-size:16px; margin-bottom: 20px; color:var(--primary);">Bloquer un véhicule</h4>
+                            <form id="admin-block-form" style="display:flex; flex-direction:column; gap:16px;">
+                                <div class="form-group">
+                                    <label for="block-car-select">Véhicule concerné</label>
+                                    <select id="block-car-select" class="form-control" required>
+                                        <option value="" disabled selected>Choisir un véhicule...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block-start-date">Date de début</label>
+                                    <input type="date" id="block-start-date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block-end-date">Date de fin</label>
+                                    <input type="date" id="block-end-date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block-reason">Motif de blocage</label>
+                                    <input type="text" id="block-reason" class="form-control" placeholder="Ex: Vidange / Peinture / Loueur privé" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Bloquer ces dates</button>
+                            </form>
+                        </div>
+
+                        <!-- Blocked Dates List Table -->
+                        <div class="table-wrapper glass">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Véhicule</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
+                                        <th>Motif</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-blocked-table-body">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- CAR CRUD MODAL (ADD & EDIT) -->
+    <div class="modal" id="car-crud-modal">
+        <div class="modal-content glass" style="max-width: 600px;">
+            <form id="car-crud-form">
+                <div class="modal-header">
+                    <h3 style="font-family: var(--font-title); font-size: 20px; color: var(--primary);" id="car-modal-title">Ajouter un véhicule</h3>
+                    <button type="button" class="modal-close" onclick="closeCarModal()">
+                        <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                
+                <div class="modal-body" style="display:flex; flex-direction:column; gap:16px;">
+                    <input type="hidden" id="car-crud-id">
+                    
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div class="form-group">
+                            <label for="car-brand">Marque</label>
+                            <input type="text" id="car-brand" class="form-control" placeholder="Ex: Kia" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="car-model">Modèle</label>
+                            <input type="text" id="car-model" class="form-control" placeholder="Ex: Rio" required>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div class="form-group">
+                            <label for="car-category">Catégorie</label>
+                            <select id="car-category" class="form-control" required>
+                                <option value="Citadine">Citadine</option>
+                                <option value="Berline">Berline</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Familiale">Familiale</option>
+                                <option value="Luxe">Luxe</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="car-plate">Plaque d'immatriculation</label>
+                            <input type="text" id="car-plate" class="form-control" placeholder="Ex: 220 TU 4321" required>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label for="car-trans">Boîte</label>
+                            <select id="car-trans" class="form-control" required>
+                                <option value="Manuelle">Manuelle</option>
+                                <option value="Automatique">Automatique</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="car-fuel">Carburant</label>
+                            <select id="car-fuel" class="form-control" required>
+                                <option value="Essence">Essence</option>
+                                <option value="Diesel">Diesel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="car-seats">Nbr Sièges</label>
+                            <input type="number" id="car-seats" class="form-control" min="2" max="9" value="5" required>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:16px;">
+                        <div class="form-group">
+                            <label for="car-price">Prix / jour (DT)</label>
+                            <input type="number" id="car-price" class="form-control" min="20" max="1000" placeholder="110" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="car-status">Disponibilité administrative</label>
+                            <select id="car-status" class="form-control" required>
+                                <option value="Disponible">Disponible</option>
+                                <option value="Maintenance">En Maintenance</option>
+                                <option value="Indisponible">Indisponible (Hors-flotte)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="car-image">URL de l'image du véhicule</label>
+                        <input type="url" id="car-image" class="form-control" placeholder="https://images.unsplash.com/..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="car-desc">Description courte</label>
+                        <textarea id="car-desc" class="form-control" style="height:80px; resize:none;" placeholder="Description marketing du véhicule..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeCarModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 80px;">
+        <div class="container" style="text-align: center; font-size:12px;">
+            <p>&copy; 2026 Alhatab Rent Car. console d'administration protégée | Tunisie.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Voitures | Alhatab Rent Car - Agence de Location Tunisie</title>
+    
+    <!-- Meta Descriptions & SEO -->
+    <meta name="description" content="Découvrez notre large gamme de véhicules disponibles à la location en Tunisie : citadines pas cher, berlines de luxe, SUVs et familiales. Prix transparents.">
+    <meta name="keywords" content="location voiture pas cher Tunisie, location voiture tunis, location berline de luxe tunis, SUV location tunisie, louer clio tunisie">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                </svg>
+                Alhatab <span>Rent Car</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="cars.html" class="active">Nos Voitures</a>
+                <a href="reserve.html">Réserver</a>
+                <a href="dashboard.html">Espace Client</a>
+                <a href="admin.html">Administration</a>
+            </nav>
+            
+            <button class="nav-btn" onclick="window.location.href='reserve.html'">Réserver</button>
+            
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Notre Catalogue de Véhicules</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Accueil</a>
+                <span>&gt;</span>
+                <span>Nos Voitures</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Main Area -->
+    <main class="container" style="padding-bottom: 80px;">
+        <div class="catalog-layout">
+            
+            <!-- Filter Sidebar -->
+            <aside class="filter-sidebar glass">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:15px;">
+                    <h3 style="font-family: var(--font-title); font-size:18px; color: var(--primary);">Filtres</h3>
+                    <button id="reset-filters" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; text-transform:uppercase;">Réinitialiser</button>
+                </div>
+                
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <h4>Catégories</h4>
+                    <div class="checkbox-group" id="filter-categories">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Citadine"> Citadines
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Berline"> Berlines
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="SUV"> SUVs / Crossovers
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Familiale"> Familiales
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Luxe"> Luxe & Prestige
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-section">
+                    <h4>Prix max / jour</h4>
+                    <div class="range-slider-container">
+                        <div class="range-values">
+                            <span>50 DT</span>
+                            <span id="price-val">600 DT</span>
+                        </div>
+                        <input type="range" id="filter-price" class="range-slider" min="50" max="600" step="10" value="600">
+                    </div>
+                </div>
+
+                <!-- Transmission Filter -->
+                <div class="filter-section">
+                    <h4>Boîte de vitesse</h4>
+                    <div class="checkbox-group" id="filter-transmission">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Manuelle"> Manuelle
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Automatique"> Automatique
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Passenger Filter -->
+                <div class="filter-section">
+                    <h4>Nombre de sièges</h4>
+                    <div class="checkbox-group" id="filter-seats">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="4"> 4 Sièges
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="5"> 5 Sièges
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="7"> 7 Sièges
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Catalog Listing -->
+            <section style="padding:0;">
+                
+                <!-- Toolbar -->
+                <div class="catalog-toolbar glass" style="padding: 15px 24px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                    <div class="catalog-search-wrapper">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="search-input" class="form-control catalog-search" placeholder="Rechercher par marque ou modèle...">
+                    </div>
+                    
+                    <div class="catalog-sorting">
+                        <span>Trier par :</span>
+                        <select id="sort-select">
+                            <option value="default">Recommandé</option>
+                            <option value="price-asc">Prix : croissant</option>
+                            <option value="price-desc">Prix : décroissant</option>
+                            <option value="name-asc">Nom : A - Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Vehicles Grid -->
+                <div class="cars-grid" id="catalog-cars-grid" style="margin-top: 30px;">
+                    <!-- Dynamically populated -->
+                </div>
+                
+                <!-- No Results fallback -->
+                <div id="no-results" style="display:none; text-align:center; padding: 60px 0;">
+                    <svg style="width: 64px; height: 64px; color: var(--text-muted); margin-bottom: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 style="font-size:22px; margin-bottom: 8px;">Aucun véhicule trouvé</h3>
+                    <p style="color:var(--text-gray);">Modifiez vos filtres ou effectuez une autre recherche.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                        </svg>
+                        Alhatab <span>Rent Car</span>
+                    </a>
+                    <p>Votre partenaire de confiance pour la location de voiture en Tunisie. Flotte de prestige, assistance routière complète, tarifs compétitifs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.71.054 2.637.12 4.07 1.537 4.19 4.19.044.927.054 1.281.054 3.71 0 2.43-.01 2.784-.054 3.71-.12 2.637-1.537 4.07-4.19 4.19-.927.044-1.281.054-3.71.054-2.43 0-2.784-.01-3.71-.054-2.637-.12-4.07-1.537-4.19-4.19-.044-.927-.054-1.281-.054-3.71 0-2.43.01-2.784.054-3.71.12-2.637 1.537-4.07 4.19-4.19.927-.044 1.281-.054 3.71-.054zm0-2c-2.48 0-2.79.01-3.76.054-3.5 0-5.44 1.94-5.44 5.44 0 .97.01 1.28.054 3.76 0 2.48-.01 2.79-.054 3.76.12 3.5 2.06 5.44 5.44 5.44.97 0 1.28-.01 3.76-.054 2.48 0 2.79-.01 3.76-.054 3.5 0 5.44-1.94 5.44-5.44 0-.97-.01-1.28-.054-3.76 0-2.48.01-2.79.054-3.76-.12-3.5-2.06-5.44-5.44-5.44-.97 0-1.28-.01-3.76-.054zm0 5.837a6.163 6.163 0 100 12.326 6.163 6.163 0 000-12.326zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 100-2.881 1.44 1.44 0 000 2.881z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cars.html">Nos Voitures</a></li>
+                        <li><a href="reserve.html">Réserver en Ligne</a></li>
+                        <li><a href="dashboard.html">Espace Client</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Catégories</h4>
+                    <ul>
+                        <li><a href="cars.html?cat=Citadine">Citadines Économiques</a></li>
+                        <li><a href="cars.html?cat=Berline">Berlines Confort</a></li>
+                        <li><a href="cars.html?cat=SUV">SUVs & Crossovers</a></li>
+                        <li><a href="cars.html?cat=Luxe">Véhicules de Prestige</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Tunisie Locations</h4>
+                    <ul>
+                        <li><a href="reserve.html?pickup=tunis_aeroport">Tunis Aéroport Carthage</a></li>
+                        <li><a href="reserve.html?pickup=hammamet_centre">Hammamet</a></li>
+                        <li><a href="reserve.html?pickup=sousse_kantaoui">Sousse</a></li>
+                        <li><a href="reserve.html?pickup=djerba_aeroport">Aéroport Djerba</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alhatab Rent Car. Tous droits réservés. Conçu pour le marché tunisien.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Conditions Générales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/cars.js"></script>
+</body>
+</html>

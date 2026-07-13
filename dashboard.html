@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client | Alhatab Rent Car Tunisie</title>
+    
+    <!-- Meta Descriptions & SEO -->
+    <meta name="description" content="Gérez vos locations de voiture, téléchargez vos reçus et suivez vos paiements Click to Pay sur l'espace client Alhatab Rent Car.">
+    <meta name="keywords" content="espace client alhatab rent car, facture location voiture tunisie, justificatif location voiture tunisie">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                </svg>
+                Alhatab <span>Rent Car</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="cars.html">Nos Voitures</a>
+                <a href="reserve.html">Réserver</a>
+                <a href="dashboard.html" class="active">Espace Client</a>
+                <a href="admin.html">Administration</a>
+            </nav>
+            
+            <button class="nav-btn" onclick="window.location.href='reserve.html'">Réserver</button>
+            
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Espace Client</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Accueil</a>
+                <span>&gt;</span>
+                <span>Espace Client</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Client Layout -->
+    <main class="container" style="padding-bottom: 80px; margin-top: 40px;">
+        
+        <!-- LOGIN VIEW (SHOWN IF NOT AUTHENTICATED) -->
+        <div id="login-view" class="glass" style="max-width: 450px; margin: 40px auto; padding: 40px; border-radius: var(--radius-md); text-align: center;">
+            <h3 style="font-family: var(--font-title); font-size: 24px; color: var(--primary); margin-bottom: 8px;">Connexion Client</h3>
+            <p style="color:var(--text-gray); font-size:14px; margin-bottom: 24px;">Entrez votre email pour consulter l'historique de vos réservations.</p>
+            
+            <form id="client-login-form" style="text-align: left; display:flex; flex-direction:column; gap:16px;">
+                <div class="form-group">
+                    <label for="login-email">Adresse Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Ex: jean.dupont@gmail.com" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Accéder à mon espace</button>
+                <div style="text-align:center; font-size:12px; color:var(--text-muted); margin-top:10px;">
+                    Comptes de démo : <strong>jean.dupont@gmail.com</strong> ou <strong>m.benali@outlook.fr</strong>
+                </div>
+            </form>
+        </div>
+
+        <!-- AUTHENTICATED DASHBOARD VIEW -->
+        <div id="dashboard-view" class="dashboard-layout" style="display: none;">
+            
+            <!-- Sidebar Navigation -->
+            <aside class="dashboard-sidebar glass">
+                <div class="user-profile-header">
+                    <div class="user-avatar" id="client-avatar-letters">JD</div>
+                    <h3 id="client-fullname">Jean Dupont</h3>
+                    <p id="client-email-display">jean.dupont@gmail.com</p>
+                </div>
+
+                <div class="db-menu">
+                    <button class="db-menu-btn active" onclick="switchTab('bookings')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Mes Réservations
+                    </button>
+                    <button class="db-menu-btn" onclick="switchTab('profile')">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        Mon Profil
+                    </button>
+                    <button class="db-menu-btn" onclick="logoutClient()" style="color:var(--error); margin-top:30px;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Déconnexion
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Panels Area -->
+            <div style="min-width: 0;">
+                
+                <!-- Tab PANEL 1: BOOKINGS -->
+                <div class="dashboard-panel active" id="tab-bookings">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Mes Réservations</h2>
+                            <p>Historique et statut de vos locations de véhicules.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper glass">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Réf Résa</th>
+                                    <th>Véhicule</th>
+                                    <th>Prise en Charge</th>
+                                    <th>Restitution</th>
+                                    <th>Total Price</th>
+                                    <th>Statut Résa</th>
+                                    <th>Paiement</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab PANEL 2: PROFILE -->
+                <div class="dashboard-panel" id="tab-profile">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <h2>Mon Profil Client</h2>
+                            <p>Consultez ou mettez à jour vos informations de conducteur.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass" style="padding: 30px; border-radius: var(--radius-md); max-width:600px;">
+                        <form id="profile-edit-form" style="display:flex; flex-direction:column; gap:20px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div class="form-group">
+                                    <label for="prof-firstname">Prénom</label>
+                                    <input type="text" id="prof-firstname" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prof-lastname">Nom</label>
+                                    <input type="text" id="prof-lastname" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div class="form-group">
+                                    <label for="prof-email">Email (Non modifiable)</label>
+                                    <input type="email" id="prof-email" class="form-control" readonly style="opacity: 0.6;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prof-phone">Téléphone</label>
+                                    <input type="tel" id="prof-phone" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prof-address">Adresse de résidence</label>
+                                    <input type="text" id="prof-address" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prof-license">Numéro de permis de conduire</label>
+                                    <input type="text" id="prof-license" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Enregistrer les modifications</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Receipt / Voucher Viewer -->
+    <div class="modal" id="voucher-modal">
+        <div class="modal-content glass" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 style="font-family: var(--font-title); font-size: 20px; color: var(--primary);">Reçu de Réservation Officiel</h3>
+                <button class="modal-close" onclick="closeVoucherModal()">
+                    <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="modal-body" id="voucher-modal-body">
+                <!-- PRINTABLE VOUCHER TEMPLATE WILL BE DYNAMICALLY INJECTED -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeVoucherModal()">Fermer</button>
+                <button class="btn btn-primary" onclick="window.print()">Imprimer / Enregistrer PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.27-3.82c.14-.4.52-.68.96-.68h9.54c.44 0 .82.28.96.68L19 11H5z"/>
+                        </svg>
+                        Alhatab <span>Rent Car</span>
+                    </a>
+                    <p>Votre partenaire de confiance pour la location de voiture en Tunisie. Flotte de prestige, assistance routière complète, tarifs compétitifs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.71.054 2.637.12 4.07 1.537 4.19 4.19.044.927.054 1.281.054 3.71 0 2.43-.01 2.784-.054 3.71-.12 2.637-1.537 4.07-4.19 4.19-.927.044-1.281.054-3.71.054-2.43 0-2.784-.01-3.71-.054-2.637-.12-4.07-1.537-4.19-4.19-.044-.927-.054-1.281-.054-3.71 0-2.43.01-2.784.054-3.71.12-2.637 1.537-4.07 4.19-4.19.927-.044 1.281-.054 3.71-.054zm0-2c-2.48 0-2.79.01-3.76.054-3.5 0-5.44 1.94-5.44 5.44 0 .97.01 1.28.054 3.76 0 2.48-.01 2.79-.054 3.76.12 3.5 2.06 5.44 5.44 5.44.97 0 1.28-.01 3.76-.054 2.48 0 2.79-.01 3.76-.054 3.5 0 5.44-1.94 5.44-5.44 0-.97-.01-1.28-.054-3.76 0-2.48.01-2.79.054-3.76-.12-3.5-2.06-5.44-5.44-5.44-.97 0-1.28-.01-3.76-.054zm0 5.837a6.163 6.163 0 100 12.326 6.163 6.163 0 000-12.326zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 100-2.881 1.44 1.44 0 000 2.881z"/></svg></a>
+                        <a href="#" class="social-link"><svg style="width:16px;height:16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cars.html">Nos Voitures</a></li>
+                        <li><a href="reserve.html">Réserver en Ligne</a></li>
+                        <li><a href="dashboard.html">Espace Client</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Catégories</h4>
+                    <ul>
+                        <li><a href="cars.html?cat=Citadine">Citadines Économiques</a></li>
+                        <li><a href="cars.html?cat=Berline">Berlines Confort</a></li>
+                        <li><a href="cars.html?cat=SUV">SUVs & Crossovers</a></li>
+                        <li><a href="cars.html?cat=Luxe">Véhicules de Prestige</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Tunisie Locations</h4>
+                    <ul>
+                        <li><a href="reserve.html?pickup=tunis_aeroport">Tunis Aéroport Carthage</a></li>
+                        <li><a href="reserve.html?pickup=hammamet_centre">Hammamet</a></li>
+                        <li><a href="reserve.html?pickup=sousse_kantaoui">Sousse</a></li>
+                        <li><a href="reserve.html?pickup=djerba_aeroport">Aéroport Djerba</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alhatab Rent Car. Tous droits réservés. Conçu pour le marché tunisien.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Conditions Générales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
